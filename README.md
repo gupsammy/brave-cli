@@ -71,11 +71,19 @@ brave-cli auth
 
 `brave-cli` resolves `BRAVE_API_KEY` from the following sources in priority order:
 
-| Source | Format |
-|--------|--------|
-| Environment variable | `export BRAVE_API_KEY=your_key` |
-| `~/.config/brave-cli/.env` | `export BRAVE_API_KEY=your_key` |
-| `~/.secrets` | `export BRAVE_API_KEY=your_key` |
+| Priority | Source | Format |
+|----------|--------|--------|
+| 1 | Environment variable | already exported into the process |
+| 2 | `~/.config/brave-cli/.env` | `BRAVE_API_KEY=your_key` |
+| 3 | `~/.secrets` | `export BRAVE_API_KEY=your_key` |
+| 4 | `~/.zshenv` | `export BRAVE_API_KEY=your_key` |
+| 5 | `~/.zshrc` | `export BRAVE_API_KEY=your_key` |
+| 6 | `~/.bashrc` | `export BRAVE_API_KEY=your_key` |
+| 7 | `~/.bash_profile` | `export BRAVE_API_KEY=your_key` |
+| 8 | `~/.profile` | `export BRAVE_API_KEY=your_key` |
+| 9 | `~/.env` | `BRAVE_API_KEY=your_key` |
+
+Both `KEY=value` and `export KEY=value` formats are accepted in any file. Quoted values (`"..."` or `'...'`) are also handled.
 
 ### Global Flags
 

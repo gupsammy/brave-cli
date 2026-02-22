@@ -25,7 +25,7 @@ This is a Go CLI tool built with [cobra](https://github.com/spf13/cobra) that wr
 
 **Internal packages** (`internal/`):
 - `brave` — HTTP client for the Brave Search API + `FetchContent` (direct HTTP, not via Brave). The `Search` method paginates automatically: the Brave API's `offset` param is a zero-based page index (not an absolute item count), each page returns ≤20 results, max 10 pages (200 results).
-- `config` — resolves `BRAVE_API_KEY` in priority order: env var → `~/.config/brave-cli/.env` → `~/.secrets` (same `export KEY=value` format as other CLI tools in this repo family)
+- `config` — resolves `BRAVE_API_KEY` in priority order: env var → `~/.config/brave-cli/.env` → `~/.secrets` → `~/.zshenv` → `~/.zshrc` → `~/.bashrc` → `~/.bash_profile` → `~/.profile` → `~/.env` (all use `export KEY=value` or bare `KEY=value` format)
 - `output` — terminal rendering (`PrintCompact` with ANSI colors) and JSON serialization for both search and fetch results. `NoColor` is a package-level bool toggled by `--no-color`.
 
 **Key conventions:**

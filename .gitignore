@@ -1,0 +1,5 @@
+brave-cli
+*.exe
+*.test
+*.out
+.env

@@ -13,8 +13,9 @@ var authCmd = &cobra.Command{
 	Use:   "auth",
 	Short: "Verify BRAVE_API_KEY is set and valid",
 	Long:  `Makes a minimal test search to confirm your API key is accepted.`,
-	Args:  cobra.NoArgs,
-	RunE:  runAuth,
+	Args:         cobra.NoArgs,
+	RunE:         runAuth,
+	SilenceUsage: true,
 }
 
 func init() {

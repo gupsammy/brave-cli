@@ -19,8 +19,9 @@ var fetchCmd = &cobra.Command{
 Script/style blocks, navigation, and boilerplate are removed.
 
 Output formats: text (default), json`,
-	Args: cobra.ExactArgs(1),
-	RunE: runFetch,
+	Args:         cobra.ExactArgs(1),
+	RunE:         runFetch,
+	SilenceUsage: true,
 }
 
 func init() {

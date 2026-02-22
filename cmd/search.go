@@ -30,15 +30,16 @@ Results go to stdout. Progress messages (when --content is used) go to stderr.
 
 Freshness values: day, week, month, year
 Output formats:  compact (default), json`,
-	Args: cobra.ExactArgs(1),
-	RunE: runSearch,
+	Args:         cobra.ExactArgs(1),
+	RunE:         runSearch,
+	SilenceUsage: true, // don't print usage on runtime errors
 }
 
 func init() {
 	rootCmd.AddCommand(searchCmd)
 
 	f := searchCmd.Flags()
-	f.IntVarP(&searchCount, "count", "n", 10, "Number of results (1-100; paginates automatically past 20)")
+	f.IntVarP(&searchCount, "count", "n", 10, "Number of results (1-200; API pages at 20 results each)")
 	f.StringVar(&searchFreshness, "freshness", "", "Date filter: day, week, month, year")
 	f.StringVar(&searchCountry, "country", "", "2-char country code (e.g. US, GB)")
 	f.BoolVar(&searchExtraSnippets, "extra-snippets", false, "Fetch additional text excerpts per result")

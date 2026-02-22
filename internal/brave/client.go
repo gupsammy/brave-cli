@@ -13,6 +13,10 @@ import (
 	"golang.org/x/net/html"
 )
 
+// pagingDelay is the minimum gap between paginated requests.
+// The Free AI plan allows 1 req/s; we add a small buffer.
+const pagingDelay = 1200 * time.Millisecond
+
 const baseURL = "https://api.search.brave.com/res/v1"
 
 var freshnessMap = map[string]string{
@@ -81,8 +85,8 @@ func (c *Client) Search(query string, opts SearchOpts) (*SearchResponse, error) 
 	if opts.Count <= 0 {
 		opts.Count = 10
 	}
-	if opts.Count > 100 {
-		opts.Count = 100
+	if opts.Count > 200 {
+		opts.Count = 200
 	}
 	if opts.Safesearch == "" {
 		opts.Safesearch = "moderate"
@@ -90,14 +94,20 @@ func (c *Client) Search(query string, opts SearchOpts) (*SearchResponse, error) 
 
 	var all []SearchResult
 	remaining := opts.Count
-	offset := 0
+	// Brave API: offset is a page index (0-9), not an absolute item position.
+	// Each page returns up to 20 results. Max reachable: 10 pages × 20 = 200.
+	pageNum := 0
 
-	for remaining > 0 {
+	for remaining > 0 && pageNum <= 9 {
+		if pageNum > 0 {
+			time.Sleep(pagingDelay) // respect 1 req/s rate limit on Free plan
+		}
+
 		batch := remaining
 		if batch > 20 {
 			batch = 20
 		}
-		items, err := c.fetchPage(query, batch, offset, opts)
+		items, err := c.fetchPage(query, batch, pageNum, opts)
 		if err != nil {
 			return nil, err
 		}
@@ -106,7 +116,7 @@ func (c *Client) Search(query string, opts SearchOpts) (*SearchResponse, error) 
 			break // API returned fewer results than requested — no more pages
 		}
 		remaining -= batch
-		offset += batch
+		pageNum++
 	}
 
 	return &SearchResponse{Items: all, Query: query, Total: len(all)}, nil

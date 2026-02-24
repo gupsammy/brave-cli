@@ -28,24 +28,33 @@
 
 ## Installation
 
-### Prerequisites
+### Quick Install (macOS / Linux)
 
-- Go 1.21 or later
-- A [Brave Search API key](https://api-dashboard.search.brave.com/) (free tier available)
+```sh
+curl -fsSL https://raw.githubusercontent.com/gupsammy/brave-cli/main/install.sh | sh
+```
 
-### Install
+Detects your OS and architecture, downloads the pre-built binary from [GitHub Releases](https://github.com/gupsammy/brave-cli/releases), and installs it to `/usr/local/bin` (or `~/.local/bin` if `/usr/local/bin` is not writable).
+
+### Via Go
+
+Requires Go 1.21 or later:
 
 ```sh
 go install github.com/gupsammy/brave-cli@latest
 ```
 
-Or build from source:
+### Build from Source
 
 ```sh
-git clone https://github.com/samarthgupta/brave-cli.git
+git clone https://github.com/gupsammy/brave-cli.git
 cd brave-cli
 go build -o brave-cli .
 ```
+
+### Prerequisites
+
+- A [Brave Search API key](https://api-dashboard.search.brave.com/) (free tier available)
 
 ## Usage
 

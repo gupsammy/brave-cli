@@ -5,9 +5,9 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/samarthgupta/brave-cli/internal/brave"
-	"github.com/samarthgupta/brave-cli/internal/config"
-	"github.com/samarthgupta/brave-cli/internal/output"
+	"github.com/gupsammy/brave-cli/internal/brave"
+	"github.com/gupsammy/brave-cli/internal/config"
+	"github.com/gupsammy/brave-cli/internal/output"
 )
 
 var (

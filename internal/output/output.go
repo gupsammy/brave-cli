@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/samarthgupta/brave-cli/internal/brave"
+	"github.com/gupsammy/brave-cli/internal/brave"
 )
 
 // NoColor disables ANSI escape codes when set to true.

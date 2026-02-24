@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/samarthgupta/brave-cli/internal/output"
+	"github.com/gupsammy/brave-cli/internal/output"
 )
 
 var rootCmd = &cobra.Command{

@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/samarthgupta/brave-cli/cmd"
+	"github.com/gupsammy/brave-cli/cmd"
 )
 
 func main() {
